@@ -48,6 +48,11 @@ class DLMixpanelExtension extends Extension
     protected function processSemanticParameters(ContainerBuilder $container, array $config): void
     {
         $container->setParameter('mixpanel_token', $config['token']);
-        $container->setParameter('mixpanel_options', $config['options']);
+
+        if (array_key_exists('options', $config)) {
+            $container->setParameter('mixpanel_options', $config['options']);
+        } else {
+            $container->setParameter('mixpanel_options', []);
+        }
     }
 }
