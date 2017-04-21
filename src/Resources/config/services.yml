@@ -1,0 +1,6 @@
+services:
+  mixpanel:
+    class: DL\MixpanelBundle\Service\MixpanelService
+    arguments:
+      - "%mixpanel_token%"
+      - "%mixpanel_options%"
