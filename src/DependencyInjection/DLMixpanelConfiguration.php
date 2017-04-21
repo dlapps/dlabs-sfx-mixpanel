@@ -25,10 +25,19 @@ class DLMixpanelConfiguration implements ConfigurationInterface
         $root
             ->children()
                 ->scalarNode('token')
-                    ->end()
+                ->end()
                 ->arrayNode('options')
-                    ->defaultValue([])
+                    ->children()
+                        ->integerNode('max_batch_size')->defaultValue(50)->end()
+                        ->integerNode('max_queue_size')->defaultValue(1000)->end()
+                        ->booleanNode('debug')->defaultFalse()->end()
+                        ->scalarNode('consumer')->defaultValue('curl')->end()
+                        ->scalarNode('host')->defaultValue('host')->end()
+                        ->scalarNode('events_endpoint')->defaultValue('/track')->end()
+                        ->scalarNode('people_endpoint')->defaultValue('/engage')->end()
+                        ->booleanNode('use_ssl')->defaultTrue()->end()
                     ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
